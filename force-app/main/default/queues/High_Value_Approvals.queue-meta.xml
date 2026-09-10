@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesIncludeBosses>false</doesIncludeBosses>
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <email>abdoehab30@gmail.com</email>
+    <name>High-Value Approvals</name>
+    <queueMembers>
+        <users>
+            <user>abdoehab30.bo01la_org@agentforce.com</user>
+            <user>abdoehab30.surveyintegration@gmail.com</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Pre_Authorization__c</sobjectType>
+    </queueSobject>
+</Queue>

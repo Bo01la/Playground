@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>transaction_Validation</fullName>
+    <active>true</active>
+    <description>if company on lead is != MEDIXA then error</description>
+    <errorConditionFormula>UPPER( Company ) != &apos;MEDIXA&apos;</errorConditionFormula>
+    <errorMessage>company must be Medixa to save this lead</errorMessage>
+</ValidationRule>

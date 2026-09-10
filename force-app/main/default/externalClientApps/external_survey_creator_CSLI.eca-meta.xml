@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalClientApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>abdoehab30@gmail.com</contactEmail>
+    <distributionState>Local</distributionState>
+    <isProtected>false</isProtected>
+    <label>external survey creator CSLI</label>
+    <orgScopedExternalApp>00DgL00000aN63B:external_survey_creator_CSLI</orgScopedExternalApp>
+</ExternalClientApplication>

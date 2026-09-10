@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExtlClntAppOauthSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <commaSeparatedOauthScopes>Api, RefreshToken</commaSeparatedOauthScopes>
+    <externalClientApplication>external_survey_creator_CSLI</externalClientApplication>
+    <isFirstPartyAppEnabled>false</isFirstPartyAppEnabled>
+    <label>external_survey_creator_CSLI_oauth</label>
+    <oauthLink>00DgL00000aN63B:888gL000001MlAz</oauthLink>
+</ExtlClntAppOauthSettings>
