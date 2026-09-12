@@ -12,8 +12,8 @@ public with sharing class SLACalculator {
         // Fetch default Business Hours
         BusinessHours defaultBH = [SELECT Id FROM BusinessHours WHERE IsDefault = true LIMIT 1];
         
-        // 48 hours converted to milliseconds (48 * 60 * 60 * 1000)
-        Long millisecondsToAdd = 172800000L; 
+        // 16 hours converted to milliseconds (16 * 60 * 60 * 1000)
+        Long millisecondsToAdd = 57600000L; 
 
         for (SLAInput input : inputs) {
             DateTime startDate = input.startDateTime != null ? input.startDateTime : System.now();

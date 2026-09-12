@@ -180,6 +180,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>SLACalculator</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Student</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -3121,6 +3125,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Product2.price_freeze_expiration_date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Promotion.AreQualItemsExclFromDiscounts</field>
         <readable>false</readable>
@@ -4382,6 +4391,61 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>claim__c.Product__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>claim__c.Rejection_reason__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>claim__c.Related_Account__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>claim__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>claim__c.claim_amount__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>claim__c.submission_date__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>claim_line_item__c.approved_amount__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>claim_line_item__c.related_member_policy__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>claim_line_item__c.status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>member_policy__c.annual_limit__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>member_policy__c.total_consumed__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>platform_created_survey__e.Phone__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -4427,7 +4491,19 @@
     </fieldPermissions>
     <flowAccesses>
         <enabled>false</enabled>
+        <flow>Provider_Portal_Bulk_Claim_Processor</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>claim_status_updated_based_on_product_EXP_date</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
         <flow>create_survey_from_external_platform</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>member_policy_rollup_memic_on_claim_line_item</flow>
     </flowAccesses>
     <flowAccesses>
         <enabled>false</enabled>
@@ -4633,6 +4709,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>FinanceTransaction-Finance Transaction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FlowRecord-Flow Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>FulfillmentOrder-Fulfillment Order Layout</layout>
@@ -4914,6 +4993,15 @@
         <layout>WorkTypeGroupMember-Work Type Group Member Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>claim__c-claim Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>claim_line_item__c-claim line item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>member_policy__c-member policy Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>survey__c-survey Layout</layout>
     </layoutAssignments>
     <objectPermissions>
@@ -5173,6 +5261,18 @@
     </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Pre_Authorization__c</tab>
+        <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>claim__c</tab>
+        <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>claim_line_item__c</tab>
+        <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>member_policy__c</tab>
         <visibility>DefaultOff</visibility>
     </tabVisibilities>
     <tabVisibilities>

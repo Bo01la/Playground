@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>update_due_date</name>
+        <label>update due date</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>SLACalculator</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>set_SLA</targetReference>
+        </connector>
+        <flowTransactionModel>Automatic</flowTransactionModel>
+        <inputParameters>
+            <name>startDateTime</name>
+            <value>
+                <elementReference>$Record.CreatedDate</elementReference>
+                <inputConfiguratorMode>Resource</inputConfiguratorMode>
+            </value>
+        </inputParameters>
+        <nameSegment>SLACalculator</nameSegment>
+        <offset>0</offset>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
     <apiVersion>67.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>set_SLA</name>
+        <label>set SLA</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.SLA_Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>update_due_date</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
     <decisions>
         <name>high_cost</name>
         <label>high cost ?</label>
-        <locationX>616</locationX>
-        <locationY>371</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>update_due_date</targetReference>
+        </defaultConnector>
         <defaultConnectorLabel>low</defaultConnectorLabel>
         <rules>
             <name>High</name>
@@ -41,7 +79,7 @@ Requirement: When a record is created, automatically assign it to the &quot;High
     <processMetadataValues>
         <name>CanvasMode</name>
         <value>
-            <stringValue>FREE_FORM_CANVAS</stringValue>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
         </value>
     </processMetadataValues>
     <processMetadataValues>
@@ -54,8 +92,11 @@ Requirement: When a record is created, automatically assign it to the &quot;High
     <recordUpdates>
         <name>update_the_cost</name>
         <label>update the cost</label>
-        <locationX>484</locationX>
-        <locationY>479</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>update_due_date</targetReference>
+        </connector>
         <inputAssignments>
             <field>OwnerId</field>
             <value>
@@ -65,8 +106,8 @@ Requirement: When a record is created, automatically assign it to the &quot;High
         <inputReference>$Record</inputReference>
     </recordUpdates>
     <start>
-        <locationX>490</locationX>
-        <locationY>48</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <connector>
             <targetReference>high_cost</targetReference>
         </connector>

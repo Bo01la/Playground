@@ -10,5 +10,8 @@
     <tabs>standard-LightningInstrumentation</tabs>
     <tabs>survey__c</tabs>
     <tabs>Pre_Authorization__c</tabs>
+    <tabs>claim__c</tabs>
+    <tabs>member_policy__c</tabs>
+    <tabs>claim_line_item__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

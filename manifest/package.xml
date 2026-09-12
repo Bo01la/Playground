@@ -510,6 +510,9 @@
 		<members>WorkTypeGroup</members>
 		<members>WorkTypeGroupMember</members>
 		<members>WorkflowSLAAction</members>
+		<members>claim__c</members>
+		<members>claim_line_item__c</members>
+		<members>member_policy__c</members>
 		<members>platform_created_survey__e</members>
 		<members>survey__c</members>
 		<members>survey_notification__e</members>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label><!-- Status --></label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Auto Approved</masterLabel>
+        <translation><!-- Auto Approved --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Completed</masterLabel>
+        <translation><!-- Completed --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>New</masterLabel>
+        <translation><!-- New --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Pending</masterLabel>
+        <translation><!-- Pending --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rejected by screen flow</masterLabel>
+        <translation><!-- Rejected by screen flow --></translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Require Manual Review</masterLabel>
+        <translation><!-- Require Manual Review --></translation>
+    </picklistValues>
+</CustomFieldTranslation>

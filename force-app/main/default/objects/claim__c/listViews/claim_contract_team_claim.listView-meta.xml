@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>claim_contract_team_claim</fullName>
+    <filterScope>Queue</filterScope>
+    <label>claim contract team</label>
+    <queue>claim_contract_team</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>
