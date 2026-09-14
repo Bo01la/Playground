@@ -10,8 +10,8 @@
     "test:unit:watch": "sfdx-lwc-jest --watch",
     "test:unit:debug": "sfdx-lwc-jest --debug",
     "test:unit:coverage": "sfdx-lwc-jest --coverage",
-    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
-    "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}\"",
+    "prettier": "prettier --write \"**/*.{cls,cmp,component,css,html,js,json,jsx,md,page,trigger,tsx,xml,yaml,yml}\"",
+    "prettier:verify": "prettier --check \"**/*.{cls,cmp,component,css,html,js,json,jsx,md,page,trigger,tsx,xml,yaml,yml}\"",
     "prepare": "husky || true",
     "precommit": "lint-staged"
   },
@@ -28,17 +28,16 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
-    "prettier-plugin-apex": "^2.2.6"
+    "prettier-plugin-apex": "^2.2.6",
+    "prettier-plugin-tailwindcss": "^0.8.1"
   },
   "lint-staged": {
-    "**/*.{cls,cmp,component,css,html,js,json,md,page,trigger,xml,yaml,yml}": [
+    "**/*.{cls,cmp,component,css,html,js,json,jsx,md,page,trigger,tsx,xml,yaml,yml}": [
       "prettier --write"
     ],
-    "**/{aura,lwc}/**/*.js": [
-      "eslint"
-    ],
+    "**/{aura,lwc}/**/*.js": ["eslint"],
     "**/lwc/**": [
-        "sfdx-lwc-jest -- --bail --findRelatedTests --passWithNoTests"
+      "sfdx-lwc-jest -- --bail --findRelatedTests --passWithNoTests"
     ]
   }
 }

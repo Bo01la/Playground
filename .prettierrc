@@ -1,8 +1,10 @@
 {
   "trailingComma": "none",
+  "semi": true,
   "plugins": [
     "prettier-plugin-apex",
-    "@prettier/plugin-xml"
+    "@prettier/plugin-xml",
+    "prettier-plugin-tailwindcss"
   ],
   "overrides": [
     {
@@ -12,6 +14,18 @@
     {
       "files": "*.{cmp,page,component}",
       "options": { "parser": "html" }
+    },
+    {
+      "files": "*.{jsx,tsx}",
+      "options": { "parser": "babel" }
+    },
+    {
+      "files": "*.css",
+      "options": { "parser": "css" }
+    },
+    {
+      "files": "*.json",
+      "options": { "parser": "json" }
     }
   ]
 }
