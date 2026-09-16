@@ -5,13 +5,118 @@
 // You can also execute the entire file by running the command:
 //     SFDX: Execute Anonymous Apex with Editor Contents
 
-date dt1 = date.newInstance(2026, 9, 14);
-date dt2 = date.newInstance(2026, 5, 10);
+// String stt = 'hello';
 
-Integer dt3 = dt1.daysBetween(dt2);
-Integer dt4 = dt2.daysBetween(dt1);
-system.debug('the days between are: ' + dt3);
-system.debug('the days between are: ' + dt4);
+// system.debug(stt.indexOf('h'));
+// system.debug(stt.capitalize());
+// system.debug(stt.toUpperCase());
+// system.debug(stt.toLowerCase());
+// System.debug(msg);
 
-system.debug('unformatted dt1 = ' + dt1);
-system.debug('formatted dt1 = ' + dt1.format());
+// --------------------------------------------------------------------
+
+// List<Account> myAcc = new List<Account>();
+// myAcc = [SELECT Name
+// FROM Account
+// WHERE Name = 'My Azz'
+// ];
+
+// system.debug(myAcc.size());
+
+// for (Account Acc : MyAcc) {
+//   acc.Name = 'Azz Bss';
+// }
+
+// update myAcc ;
+
+// --------------------------------------------------------------------
+
+// List<Account> myAcc = new List<Account>();
+
+// myAcc = [
+//   SELECT Name
+//   FROM Account
+//   WHERE Name LIKE 'uni%'
+// ];
+
+// system.debug(myAcc.size());
+// Integer x = 1;
+
+// for (Account Acc : myAcc) {
+//   Acc.Name = 'updated ' + x;
+//   x++;
+// }
+
+// System.debug(myAcc);
+// update myAcc;
+
+// List<Case> myCase = new List<Case>();
+
+// myCase = [
+//   SELECT Status
+//   FROM Case
+//   WHERE Status = 'New'
+// ];
+
+// for (Case cs : myCase) {
+//   cs.OwnerId = '005gL00000NXP2PQAX';
+// }
+
+// update myCase;
+
+// --------------------------------------------------------------------
+
+// List<member_policy__c> memberPolicy = new List<member_policy__c>();
+
+// memberPolicy = [
+//   SELECT Id
+//   FROM member_policy__c
+// ];
+
+// List<claim_line_item__c> claimLineItems = new List<claim_line_item__c>();
+
+// claimLineItems = [
+//   SELECT
+//     Id,
+//     status__c,
+//     related_member_policy__r.Id,
+//     related_member_policy__r.Name
+//   FROM claim_line_item__c
+//   WHERE related_member_policy__c IN :memberPolicy
+// ];
+
+// system.debug(claimLineItems.size());
+
+// for (claim_line_item__c lit : claimLineItems) {
+//   if (lit.related_member_policy__r.Id == 'a03gL000017aYOPQA2') {
+//     lit.status__c = null;
+//   } else {
+//     lit.status__c = 'Approved';
+//   }
+// }
+
+// update claimLineItems;
+
+// --------------------------------------------------------------------
+//(below is a better approach for the same code above)
+
+// List<claim_line_item__c> claimLineItem = new List<claim_line_item__c>();
+
+// claimLineItem = [
+//   SELECT
+//     Id,
+//     Name,
+//     related_member_policy__r.Name,
+//     related_member_policy__r.Id,
+//     status__c
+//   FROM claim_line_item__c
+// ];
+
+// for (claim_line_item__c lt : claimLineItem) {
+//   if (lt.related_member_policy__r.Id == 'a03gL000017qdK6QAI') {
+//     lt.status__c = null;
+//   }
+// }
+
+// update claimLineItem;
+
