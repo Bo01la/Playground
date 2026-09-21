@@ -120,3 +120,145 @@
 
 // update claimLineItem;
 
+// --------------------------------------------------------------------
+
+/* the class I created via developer consol in SF:
+public class Calculator {
+  public integer num1;
+  public integer num2;
+  public decimal result;
+  public string operator;
+
+  public void display(){
+      calculation(num1, num2, operator);
+    System.debug(num1 + ' ' + operator + ' ' + num2 + ' = ' + result  );
+  }
+
+  private decimal calculation (integer n1, integer n2, string op){
+    switch on op.trim() {
+      when '+' {
+        result = n1 + n2;
+        return result;
+      }
+      when '-' {
+        result = n1 - n2;
+        return result;
+      }
+      when '*' {
+        result = n1 * n2;
+        return result;
+      }
+      when '/' {
+        if (n2 != 0) {
+          result = n1 * n2;
+        }
+        else {
+          System.debug('we can not devide on 0 !!');
+          return -1;
+        }
+        return result;
+      }
+      when else {
+        System.debug('enter a valid operator + - / *');
+        return -1 ;
+      }
+    }
+  }
+}
+*/
+// // below is an istance of the Calculator class
+// Calculator operation1 = new Calculator();
+// operation1.num1 = 10;
+// operation1.num2 = 0;
+// operation1.operator = '/';
+// operation1.display();
+
+// --------------------------------------------------------------------
+
+// correct way to write a class (must include a constructor, variables are private and methods are public)
+/*
+public class Cars {
+  private string brand;
+  private integer year;
+  private integer speed;
+
+          // constructor method (we do not add void or any return type to constructors) we also must use this. when assigning variables 
+  public  Cars(string brand, integer year, integer speed) {
+    this.brand = brand;
+    this.year = year;
+    this.speed = speed;
+  }
+
+            // constructor method (we do not add void or any return type to constructors) we also must use this. when assigning variables 
+  public  Cars() {
+    this.brand = 'default: audi';
+    this.year = 1993;
+    this.speed = 100;
+  }
+
+  private Integer speedUp() {
+    this.speed += 20;
+    return this.speed;
+  }
+
+  public void currentStatus() {
+    system.debug('brand: ' + brand + ' year: ' + year + ' speed: ' + speed);
+  }
+
+  public void accelirate() {
+    speedUp();
+    system.debug('brand: ' + brand + ' year: ' + year + ' speed: ' + speed);
+  }
+}
+*/
+// below is an instance of the class Cars
+
+// System.debug('a class with values assigned using constructor');
+// Cars car1 = new Cars('mercedes', 2026, 200);
+// car1.currentStatus();
+// car1.accelirate();
+
+// System.debug('a class with default values using default constructor');
+// Cars car2 = new Cars();
+// car2.currentStatus();
+// car2.accelirate();
+
+// --------------------------------------------------------------------
+
+/*
+public class FootballTeam {
+  string name;
+  integer age;
+  static string club = 'Digla';
+
+  // creating a constructor method:
+  public FootballTeam(string name, integer age) {
+    this.name = name;
+    this.age = (age < 15 || age > 40) ?  -1 : age;
+  }
+
+  // creating a default constructor method:
+  public FootballTeam() {
+    this.name = 'default player';
+    this.age = 11;
+  }
+
+  public void display() {
+    system.debug(name + ' ' + age + ' ' + club);
+  }
+}
+*/
+
+// FootballTeam p1 = new FootballTeam('Abo treka', 39);
+// p1.display();
+// FootballTeam p2 = new FootballTeam('Barakat', 29);
+// p2.display();
+// FootballTeam p3 = new FootballTeam('7adary', 19);
+// p3.display();
+// FootballTeam p4 = new FootballTeam();
+// p4.display();
+//  // p1.club = 'el ahly'; // this will throw an error because the variable is private.
+
+// var = condition ? (true): (false)
+
+
