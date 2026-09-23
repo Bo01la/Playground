@@ -262,3 +262,296 @@ public class FootballTeam {
 // var = condition ? (true): (false)
 
 
+// --------------------------------------------------------------------
+
+// List <Contact> theContacts = new List <Contact>();
+
+// theContacts = [SELECT Id, Name
+// FROM Contact
+// WHERE IsDeleted = true
+// All ROWS
+// ];
+
+// System.debug('Total including deleted: ' + theContacts.size());
+
+// if (!theContacts.isEmpty()) {
+//     undelete theContacts;
+// }
+
+
+// --------------------------------------------------------------------
+//an Account utility class to create, update and undelete Account records
+
+// public class AccountUtil {
+
+//   public static void createOneAccount(string n, string ph){
+//     Account acc = new Account(Name = n, Phone = ph);
+//     insert acc;
+//     system.debug('ONE Account created');
+//   }
+
+//   public static void createMultipleAccounts(integer num, string n, string fx ){
+//     List<Account> accounts = new List<Account>();
+//     for (integer i = 0; i < num; i++ ) {
+//       Account acc = new Account(Name = n + ' ' + i, Fax = fx);
+//       accounts.add(acc);
+//     }
+//     insert accounts;
+//     system.debug(num +' Accounts created');
+//   }
+
+//   public static void updateAccount(string n, string newN){
+//     list <Account> acc = [SELECT Id, Name
+//     FROM Account
+//     WHERE Name = :n 
+//     LIMIT 1
+//     ];
+
+//     if (acc.isEmpty()) {
+//       system.debug('No accounts were found. please douple check the name');
+//     }
+//     else {
+//       acc[0].Name = newN;
+//       update acc;
+//       system.debug('Account has been updated');
+//     }
+//   }
+
+//   public static void undeleteAccounts(){
+//     list <Account> acc = [SELECT Id, Name
+//     FROM Account
+//     WHERE IsDeleted = true
+//     ALL ROWS
+//     ];
+
+//     if(!acc.isEmpty()){
+//       undelete acc;
+//       system.debug('Account has been restored from recycle bin');
+//     }
+//   }
+    
+//     public static void deleteAll(string n){
+//       List <Account> acc = [SELECT Name FROM Account WHERE Name LIKE '%class%'];
+//       if (!acc.isEmpty()) {
+//         delete acc;
+//         system.debug('all your created accounts with this class has been deleted');
+//       }
+//     }
+// }
+
+// using methods fron the above class
+// AccountUtil.createOneAccount('created by class', '0115801276');
+// AccountUtil.createMultipleAccounts(5, 'created by class', '0115801276');
+// AccountUtil.updateAccount('wrong name account', 'ay kalam');
+// AccountUtil.updateAccount('wa7ed kaman', 'updated by class');
+// AccountUtil.undeleteAccounts();
+// AccountUtil.deleteAll('class'); // do not run this line if you want to test the above methods xDDD
+
+// --------------------------------------------------------------------
+
+// example of using Database methods for data manipulation.
+
+// Account acc1 = new Account(Phone= '123456666');
+// Account acc2 = new Account(Name = 'database 1', Phone= '123456666');
+// Account acc3 = new Account(Name = 'database 2', Phone= '123456666');
+
+// List<Account> accList = new List<Account>{acc1, acc2, acc3};
+// // insert accList; // this will throw an error, required field is missing.
+// Database.insert(accList, false); // acc2 and acc3 will be added but acc1 will not be added because Name is required field.
+
+// --------------------------------------------------------------------
+
+// example of using Database methods for retreiving the faild data.
+
+// Account acc1 = new Account(Phone= '123456666');
+// Account acc2 = new Account(Name = 'database 3', Phone= '123456666');
+// Account acc3 = new Account(Name = 'database 4', Phone= '123456666');
+
+// list<Account> accList = new list<Account>{acc1, acc2, acc3};
+
+// // to see the operation log with success and fail records we capture the return in a list with Database.SaveResults method
+// list<Database.SaveResult> result = Database.insert(accList, false);
+
+// // displaying the result in a for loop
+// for (Database.SaveResult res : result) {
+//   // res is an object, you can not access the record fields directly using res.Name to get the account name
+//   if (res.isSuccess()) {
+//     System.debug('a record was addedd successfully');
+//   }
+//   else {
+//     //loop over errors using Database.Error and getErrors() methods
+//     for(Database.Error err: res.getErrors()){
+//       system.debug('a record was not addedd due to the below reaosn !!!!!!');
+//       system.debug(err.getStatusCode() + ': ' + err.getMessage());
+//       System.debug('the below fields caused the problem:');
+//       System.debug(err.getFields());
+//     }
+//   }
+// }
+
+
+// --------------------------------------------------------------------
+
+// Account acc1 = new Account(Name = 'database 5');
+// Account acc2 = new Account(Name = 'database 6');
+// Account acc3 = new Account();
+
+// List<Account> accList = new List<Account>{acc1, acc2, acc3};
+
+// list<Database.SaveResult> result = Database.insert(accList, false);
+
+// for (Database.SaveResult res : result) {
+//   if (res.isSuccess()) {
+//     System.debug('record was addedd successfully');
+//   }
+//   else {
+//     for (Database.Error err : res.getErrors()) {
+//       System.debug('this record was not added because of the below:');
+//       System.debug(err.getStatusCode() + ': ' + err.getMessage());
+//       system.debug('the below fields are causing the error: ');
+//       System.debug(err.getFields());
+//     }
+//   }
+// }
+
+
+// --------------------------------------------------------------------
+
+// //* This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class 
+// //* creating a trigger that add a contact when an account is created (task 1/3)
+
+// // this part is added to SF UI in the object manager -> triggers -> new trigger
+// trigger CreateDummyContact on Account (after insert) {
+//   AccountTriggerClassMethods.addContact(Trigger.new);
+// }
+
+// // this is the class that contains the methods to handle the methods inside the trigger
+// public class AccountTriggerClassMethods {
+  
+//   public static void addContact(List<Account> accounts){
+//     list<Contact> contacts = new list<Contact>();
+//     for (Account acc : accounts) {
+//       Contact cont = new Contact(LastName = 'dummy contact', AccountId = acc.Id);
+//       contacts.add(cont);
+//     }
+//     insert contacts;
+//   }
+// }
+
+
+
+// --------------------------------------------------------------------
+
+// //*This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class 
+// //* creating a trigger that prevent account deletion if it has a related contact (task 2/3)
+
+// this part is added to SF UI in the object manager -> triggers -> new trigger 
+// NOTE: we modified the preious trigger and class above to handle both last task and this task
+// trigger CreateDummyContact on Account (after insert, before delete) {
+//   if (Trigger.isAfter) {
+//     if (Trigger.isInsert) {
+//       // if the context is to insert record, the first task (insert contact) will be executed.
+//       AccountTriggerClassMethods.addContact(Trigger.new);
+//     }
+//   }
+  
+//   else if(Trigger.isBefore){
+//     if (Trigger.isDelete) {
+//       // handling the delete requested task
+//       AccountTriggerClassMethods.noDeleteWithContact(Trigger.old);
+//     }
+//   }
+// }
+
+// // this is the class that contains the methods to handle the methods inside the trigger
+// public class AccountTriggerClassMethods {
+//   // handling the previous add contact task
+//   public static void addContact(List<Account> accounts){
+//     list<Contact> contacts = new list<Contact>();
+//     for (Account acc : accounts) {
+//       Contact cont = new Contact(LastName = 'dummy contact', AccountId = acc.Id);
+//       contacts.add(cont);
+//     }
+//     insert contacts;
+//   }
+
+//   // handling this task (no delete account if there is a task)
+//   public static void noDeleteWithContact(List<Account> accounts){
+//       set<Id> idOfAccountsWithContacts = new set<Id>();
+//       // this is not bad practice since we used the query as a list to loop over and NOT inside the loop
+//       for(Contact cont : [SELECT AccountId FROM Contact WHERE AccountId IN: accounts ]){
+//         idOfAccountsWithContacts.add(cont.AccountId);
+//       }
+
+//     for (Account acc : accounts) {
+//       if (idOfAccountsWithContacts.contains(acc.Id)) {
+//         acc.addError('you can not delet this Account because it has a related Contact - OR, you deactivate the CreateDummyContact trigger');
+//       }
+//     }
+//   }
+// }
+
+
+// --------------------------------------------------------------------
+
+// //*This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class 
+// //* creating a trigger that check if address value is blank and fill it before insert (task 3/3)
+
+// // this part is added to SF UI in the object manager -> triggers -> new trigger 
+// // NOTE: we modified the preious trigger and class above to handle both last task and this task
+// trigger CreateDummyContact on Account (after insert, before insert, before delete) {
+//   if (Trigger.isAfter) {
+//     if (Trigger.isInsert) {
+//       // if the context is to insert record, the first task (insert contact) will be executed.
+//       AccountTriggerClassMethods.addContact(Trigger.new);
+//     }
+//   }
+  
+//   else if(Trigger.isBefore){
+//     if (Trigger.isDelete) {
+//       // handling the delete requested task
+//       AccountTriggerClassMethods.noDeleteWithContact(Trigger.old);
+//     }
+//     else if(Trigger.isInsert){
+//       // handle the task of filling the address fields if empty 
+//       AccountTriggerClassMethods.fillAddressIfEmpty(Trigger.new);
+//     }
+//   }
+// }
+
+// // this is the class that contains the methods to handle the methods inside the trigger
+// public class AccountTriggerClassMethods {
+//   // handling the previous add contact task
+//   public static void addContact(List<Account> accounts){
+//     list<Contact> contacts = new list<Contact>();
+//     for (Account acc : accounts) {
+//       Contact cont = new Contact(LastName = 'dummy contact', AccountId = acc.Id);
+//       contacts.add(cont);
+//     }
+//     insert contacts;
+//   }
+
+//   // handling previous task (no delete account if there is a task)
+//   public static void noDeleteWithContact(List<Account> accounts){
+//       set<Id> idOfAccountsWithContacts = new set<Id>();
+//       // this is not bad practice since we used the query as a list to loop over and NOT inside the loop
+//       for(Contact cont : [SELECT AccountId FROM Contact WHERE AccountId IN: accounts ]){
+//         idOfAccountsWithContacts.add(cont.AccountId);
+//       }
+
+//     for (Account acc : accounts) {
+//       if (idOfAccountsWithContacts.contains(acc.Id)) {
+//         acc.addError('you can not delet this Account because it has a related Contact - OR, you deactivate the CreateDummyContact trigger');
+//       }
+//     }
+//   }
+
+//   // handling this task to check if address 
+//   public static void fillAddressIfEmpty(list<Account> accounts){
+//     for (Account acc : accounts) {
+//       acc.BillingCity = String.isBlank(acc.BillingCity) ? 'added by trigger' : acc.BillingCity;
+//       acc.BillingStreet = String.isBlank(acc.BillingStreet) ? 'trigger street' : acc.BillingStreet;
+//       acc.BillingCountry = String.isBlank(acc.BillingCountry) ? 'Angola' : acc.BillingCountry;
+//     }
+//   }
+// }
