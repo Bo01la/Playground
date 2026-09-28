@@ -261,7 +261,6 @@ public class FootballTeam {
 
 // var = condition ? (true): (false)
 
-
 // --------------------------------------------------------------------
 
 // List <Contact> theContacts = new List <Contact>();
@@ -277,7 +276,6 @@ public class FootballTeam {
 // if (!theContacts.isEmpty()) {
 //     undelete theContacts;
 // }
-
 
 // --------------------------------------------------------------------
 //an Account utility class to create, update and undelete Account records
@@ -303,7 +301,7 @@ public class FootballTeam {
 //   public static void updateAccount(string n, string newN){
 //     list <Account> acc = [SELECT Id, Name
 //     FROM Account
-//     WHERE Name = :n 
+//     WHERE Name = :n
 //     LIMIT 1
 //     ];
 
@@ -329,7 +327,7 @@ public class FootballTeam {
 //       system.debug('Account has been restored from recycle bin');
 //     }
 //   }
-    
+
 //     public static void deleteAll(string n){
 //       List <Account> acc = [SELECT Name FROM Account WHERE Name LIKE '%class%'];
 //       if (!acc.isEmpty()) {
@@ -389,7 +387,6 @@ public class FootballTeam {
 //   }
 // }
 
-
 // --------------------------------------------------------------------
 
 // Account acc1 = new Account(Name = 'database 5');
@@ -414,10 +411,9 @@ public class FootballTeam {
 //   }
 // }
 
-
 // --------------------------------------------------------------------
 
-// //* This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class 
+// //* This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class
 // //* creating a trigger that add a contact when an account is created (task 1/3)
 
 // // this part is added to SF UI in the object manager -> triggers -> new trigger
@@ -427,10 +423,11 @@ public class FootballTeam {
 
 // // this is the class that contains the methods to handle the methods inside the trigger
 // public class AccountTriggerClassMethods {
-  
+
 //   public static void addContact(List<Account> accounts){
 //     list<Contact> contacts = new list<Contact>();
 //     for (Account acc : accounts) {
+
 //       Contact cont = new Contact(LastName = 'dummy contact', AccountId = acc.Id);
 //       contacts.add(cont);
 //     }
@@ -438,15 +435,13 @@ public class FootballTeam {
 //   }
 // }
 
-
-
 // --------------------------------------------------------------------
 
-// //*This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class 
+// //*This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class
 // //* creating a trigger that prevent account deletion if it has a related contact (task 2/3)
 
-// this part is added to SF UI in the object manager -> triggers -> new trigger 
-// NOTE: we modified the preious trigger and class above to handle both last task and this task
+// // this part is added to SF UI in the object manager -> triggers -> new trigger
+// // NOTE: we modified the preious trigger and class above to handle both last task and this task
 // trigger CreateDummyContact on Account (after insert, before delete) {
 //   if (Trigger.isAfter) {
 //     if (Trigger.isInsert) {
@@ -454,7 +449,7 @@ public class FootballTeam {
 //       AccountTriggerClassMethods.addContact(Trigger.new);
 //     }
 //   }
-  
+
 //   else if(Trigger.isBefore){
 //     if (Trigger.isDelete) {
 //       // handling the delete requested task
@@ -480,7 +475,7 @@ public class FootballTeam {
 //       set<Id> idOfAccountsWithContacts = new set<Id>();
 //       // this is not bad practice since we used the query as a list to loop over and NOT inside the loop
 //       for(Contact cont : [SELECT AccountId FROM Contact WHERE AccountId IN: accounts ]){
-//         idOfAccountsWithContacts.add(cont.AccountId);
+//         idOfAccountsWithContacts.add(cont.AccountId); // 20 ID have contacts
 //       }
 
 //     for (Account acc : accounts) {
@@ -491,13 +486,12 @@ public class FootballTeam {
 //   }
 // }
 
-
 // --------------------------------------------------------------------
 
-// //*This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class 
+// //*This is a series of 3 tasks related to 1 singe Accont trigger and 1 utility class
 // //* creating a trigger that check if address value is blank and fill it before insert (task 3/3)
 
-// // this part is added to SF UI in the object manager -> triggers -> new trigger 
+// // this part is added to SF UI in the object manager -> triggers -> new trigger
 // // NOTE: we modified the preious trigger and class above to handle both last task and this task
 // trigger CreateDummyContact on Account (after insert, before insert, before delete) {
 //   if (Trigger.isAfter) {
@@ -506,14 +500,14 @@ public class FootballTeam {
 //       AccountTriggerClassMethods.addContact(Trigger.new);
 //     }
 //   }
-  
+
 //   else if(Trigger.isBefore){
 //     if (Trigger.isDelete) {
 //       // handling the delete requested task
 //       AccountTriggerClassMethods.noDeleteWithContact(Trigger.old);
 //     }
 //     else if(Trigger.isInsert){
-//       // handle the task of filling the address fields if empty 
+//       // handle the task of filling the address fields if empty
 //       AccountTriggerClassMethods.fillAddressIfEmpty(Trigger.new);
 //     }
 //   }
@@ -546,12 +540,108 @@ public class FootballTeam {
 //     }
 //   }
 
-//   // handling this task to check if address 
-//   public static void fillAddressIfEmpty(list<Account> accounts){
-//     for (Account acc : accounts) {
-//       acc.BillingCity = String.isBlank(acc.BillingCity) ? 'added by trigger' : acc.BillingCity;
-//       acc.BillingStreet = String.isBlank(acc.BillingStreet) ? 'trigger street' : acc.BillingStreet;
-//       acc.BillingCountry = String.isBlank(acc.BillingCountry) ? 'Angola' : acc.BillingCountry;
+//   // handling this task to check if address
+// public static void fillAddressIfEmpty(list<Account> accounts) {
+//   for (Account acc : accounts) {
+//     acc.BillingCity = String.isBlank(acc.BillingCity)
+//       ? 'added by trigger'
+//       : acc.BillingCity;
+//     acc.BillingStreet = String.isBlank(acc.BillingStreet)
+//       ? 'trigger street'
+//       : acc.BillingStreet;
+//     acc.BillingCountry = String.isBlank(acc.BillingCountry)
+//       ? 'Angola'
+//       : acc.BillingCountry;
+//     if (!String.isBlank(acc.Industry) && acc.Industry == 'Media') {
+//       acc.Rating = 'Hot';
 //     }
 //   }
 // }
+// }
+
+// --------------------------------------------------------------------
+// // while creating a case, if the origin is "Email" then status should be "New" and priority "Medium"
+
+// trigger caseTriggers on Case (before insert) {
+//   CaseTriggersClassHandler.changeStatus(Trigger.new);
+// }
+
+// public class CaseTriggersClassHandler {
+// 	public static void changeStatus(list<Case> cases){
+//     for (Case cs : cases) {
+//       if (cs.Origin == 'Email') {
+//         cs.Status = 'New';
+//         cs.Priority = 'Medium';
+//       }
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // while creating a Lead, if the lead source is "Web" then Rating should be "Cold" otherwise it should be "Hot"
+
+// trigger LeadTriggers on Lead (before insert){
+//   LeadTriggerHandler.changeLeadRating(Trigger.new);
+// }
+
+// public class LeadTriggerHandler {
+//   public static void changeLeadRating(list<Lead> leads){
+//     for (Lead ld : leads) {
+//       ld.Rating = ld.LeadSource == 'Web' ? 'Cold' : 'Hot';
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // Creates the number of contacts which are equal to the number which we will enter in the Number of Locations field on the Account object.
+// //* note, I amended the 'addContact' method already existing in the 'AccountTriggerClassMethods' class.
+
+// public static void addContact(List<Account> accounts) {
+//   list<Contact> contacts = new List<Contact>();
+//   for (Account acc : accounts) {
+//     for (Integer i = 0; i < acc.NumberofLocations__c; i++) {
+//       Contact cont = new Contact(
+//         LastName = acc.Name + ' contact ' + i,
+//         AccountId = acc.Id
+//       );
+//       contacts.add(cont);
+//     }
+//   }
+//   insert contacts;
+// }
+
+// --------------------------------------------------------------------
+// // Upon Opportunity Creation if Amount is not null and is greater than 100000 then populate 'Hot Opportunity' in description field.
+
+// trigger opportunityTrigger on Opportunity(before insert){
+//   OpportunityTriggerHandler.changeDesription(Trigger.new);
+// }
+
+// public  class OpportunityTriggerHandler {
+//   public static void changeDesription(list<Opportunity> opportunities){
+//     for (Opportunity opp : opportunities) {
+//       if (opp.Amount > 100000 && opp.Amount != null) {
+//         opp.Description = 'Hot "added by trigger"';
+//       }
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // Upon Creation of Position (Custom Object) if it is a New Position and Open Date, Min Pay & Max Pay are not populated then populate them with below values:  Open Date = Today's Date , Max Pay = 15000 , Min Pay = 10000
+
+trigger positionTrigger on Position__c (before insert) {
+  PositionTriggerHandler.fillValues(Trigger.new);
+}
+
+public class PositionTriggerHandler{
+  public static void fillValues(list<Position__c> positions){
+    for (Position__c pso : positions) {
+      if (pso.new_position__c == 'New' && pso.Open_Date__c == null && pso.Min_Pay__c == null && pso.Max_Pay__c == null) {
+        pso.Open_Date__c = Date.today();
+        pso.Max_Pay__c = 15000;
+        pso.Min_Pay__c = 10000;
+      }      
+    }
+  }
+}

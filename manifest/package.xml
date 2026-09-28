@@ -383,6 +383,7 @@
 		<members>PaymentLineInvoice</members>
 		<members>PaymentMethod</members>
 		<members>PendingServiceRouting</members>
+		<members>Position__c</members>
 		<members>Pre_Authorization__c</members>
 		<members>Pricebook2</members>
 		<members>PricebookEntry</members>
