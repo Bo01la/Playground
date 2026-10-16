@@ -157,6 +157,7 @@
 		<members>AiEvalTestCaseResult</members>
 		<members>AiEvaluation</members>
 		<members>AiGroundingFileRef</members>
+		<members>AiGroundingLibFileDef</members>
 		<members>AiGroundingSourceStage</members>
 		<members>AiGroundingWebRef</members>
 		<members>AiJobRun</members>
@@ -218,6 +219,7 @@
 		<members>ContactPointAddress</members>
 		<members>ContactPointConsent</members>
 		<members>ContactPointEmail</members>
+		<members>ContactPointOttSvc</members>
 		<members>ContactPointPhone</members>
 		<members>ContactPointTypeConsent</members>
 		<members>ContactRequest</members>
@@ -267,6 +269,7 @@
 		<members>DataUsePurpose</members>
 		<members>DeliveryEstimationSetup</members>
 		<members>DevopsActivityLog</members>
+		<members>DevopsDeployComponent</members>
 		<members>DevopsEnvDeployment</members>
 		<members>DevopsEnvDeploymentMbr</members>
 		<members>DevopsEnvironment</members>
@@ -298,6 +301,7 @@
 		<members>DuplicateRecordItem</members>
 		<members>DuplicateRecordSet</members>
 		<members>EmailMessage</members>
+		<members>Employee__c</members>
 		<members>EngagementChannelType</members>
 		<members>EngagementChannelWorkType</members>
 		<members>Entitlement</members>
@@ -315,6 +319,7 @@
 		<members>FinanceBalanceSnapshot</members>
 		<members>FinanceTransaction</members>
 		<members>FlowOrchestrationInstance</members>
+		<members>FlowOrchestrationInstanceLink</members>
 		<members>FlowOrchestrationLog</members>
 		<members>FlowOrchestrationStageInstance</members>
 		<members>FlowOrchestrationStepInstance</members>
@@ -338,6 +343,10 @@
 		<members>Lead</members>
 		<members>LeadCleanInfo</members>
 		<members>LegalEntity</members>
+		<members>LiveAgentSession</members>
+		<members>LiveChatTranscript</members>
+		<members>LiveChatTranscriptEvent</members>
+		<members>LiveChatVisitor</members>
 		<members>Location</members>
 		<members>LocationGroup</members>
 		<members>LocationGroupAssignment</members>
@@ -354,6 +363,7 @@
 		<members>MarketSegmentField</members>
 		<members>MessagingEndUser</members>
 		<members>MessagingSession</members>
+		<members>MessagingSessionClient</members>
 		<members>MktCalculatedInsight</members>
 		<members>MktDataTransform</members>
 		<members>MktMLModel</members>
@@ -370,6 +380,8 @@
 		<members>OrderItem</members>
 		<members>OrgMetricScanResult</members>
 		<members>OrgMetricScanSummary</members>
+		<members>OutboundEngagementTemplate</members>
+		<members>OutboundEngmtContentRsrc</members>
 		<members>PartnerRole</members>
 		<members>PartyConsent</members>
 		<members>Payment</members>
@@ -437,6 +449,7 @@
 		<members>ServiceAppointment</members>
 		<members>ServiceAppointmentAttendee</members>
 		<members>ServiceContract</members>
+		<members>ServiceRequestRelatedRecord</members>
 		<members>ServiceResource</members>
 		<members>ServiceResourceSkill</members>
 		<members>ServiceTerritory</members>
@@ -729,6 +742,7 @@
 		<members>force__Partner_Enablement_User</members>
 		<members>force__SalesCloudCallCoachingSeller</members>
 		<members>force__SalesCloudSeller</members>
+		<members>force__SetupWithAgentforceUserPsg</members>
 		<members>force__SubscriptionManagementBillingAdmin</members>
 		<members>force__SubscriptionManagementBillingOperations</members>
 		<members>force__SubscriptionManagementBuyerIntegrationUser</members>
@@ -882,5 +896,5 @@
 		<members>*</members>
 		<name>Workflow</name>
 	</types>
-	<version>67.0</version>
+	<version>68.0</version>
 </Package>

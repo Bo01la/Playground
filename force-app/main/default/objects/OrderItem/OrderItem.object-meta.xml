@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>AddProduct</actionName>
@@ -100,4 +100,39 @@
     </actionOverrides>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <enableFeeds>false</enableFeeds>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Product2</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Quantity</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>UnitPrice</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ListPrice</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields
+    >TotalPrice</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields
+    >ODER_ITEM.START_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields
+    >ODER_ITEM.END_DATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields
+    >OriginalOrderItem</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >Product2</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >Quantity</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >UnitPrice</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >ListPrice</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >TotalPrice</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >ODER_ITEM.START_DATE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >ODER_ITEM.END_DATE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields
+    >OriginalOrderItem</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Product2</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>UnitPrice</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Quantity</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+    >TotalPrice</searchResultsAdditionalFields>
+    </searchLayouts>
 </CustomObject>

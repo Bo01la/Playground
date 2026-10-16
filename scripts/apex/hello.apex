@@ -1,3 +1,5 @@
+//*this File inlcudes basics of APEX and Trigger good examples / practices*/
+
 // Use .apex files to store anonymous Apex.
 // You can execute anonymous Apex in VS Code by selecting the
 //     apex text and running the command:
@@ -630,18 +632,608 @@ public class FootballTeam {
 // --------------------------------------------------------------------
 // // Upon Creation of Position (Custom Object) if it is a New Position and Open Date, Min Pay & Max Pay are not populated then populate them with below values:  Open Date = Today's Date , Max Pay = 15000 , Min Pay = 10000
 
-trigger positionTrigger on Position__c (before insert) {
-  PositionTriggerHandler.fillValues(Trigger.new);
-}
+// trigger positionTrigger on Position__c (before insert) {
+//   PositionTriggerHandler.fillValues(Trigger.new);
+// }
 
-public class PositionTriggerHandler{
-  public static void fillValues(list<Position__c> positions){
-    for (Position__c pso : positions) {
-      if (pso.new_position__c == 'New' && pso.Open_Date__c == null && pso.Min_Pay__c == null && pso.Max_Pay__c == null) {
-        pso.Open_Date__c = Date.today();
-        pso.Max_Pay__c = 15000;
-        pso.Min_Pay__c = 10000;
-      }      
-    }
-  }
-}
+// public class PositionTriggerHandler{
+//   public static void fillValues(list<Position__c> positions){
+//     for (Position__c pso : positions) {
+//       if (pso.new_position__c == 'New' && pso.Open_Date__c == null && pso.Min_Pay__c == null && pso.Max_Pay__c == null) {
+//         pso.Open_Date__c = Date.today();
+//         pso.Max_Pay__c = 15000;
+//         pso.Min_Pay__c = 10000;
+//       }
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // Account records should have a field named 'Recent Opportunity Amount'. It should contain the opportunity amount of the latest created opportunity on account.
+
+// trigger opportunityTrigger on Opportunity(before insert, after insert){
+//   if (Trigger.isBefore) {
+//     if (Trigger.isInsert) {
+//         OpportunityTriggerHandler.changeDesription(Trigger.new);
+//     }
+//   }
+
+//   if (Trigger.isAfter) {
+//     if (Trigger.isInsert) {
+//       OpportunityTriggerHandler.manipulateAccount(Trigger.new);
+//     }
+//   }
+// }
+
+// public  class OpportunityTriggerHandler {
+//   public static void changeDesription(list<Opportunity> opportunities){
+//     for (Opportunity opp : opportunities) {
+//       if (opp.Amount > 100000 && opp.Amount != null) {
+//         opp.Description = 'Hot "added by trigger"';
+//       }
+//     }
+//   }
+
+//   public static void manipulateAccount(list<Opportunity> opportunities ){
+//     List<Account> accounts = new List<Account>();
+//     for (Opportunity opp : opportunities) {
+//       Account acc = new Account(Id = opp.AccountId, Recent_Opp_Amount__c = opp.Amount);
+//       accounts.add(acc);
+//     }
+//     update accounts;
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // When a Case is created on any Account, put the latest case number on the Account in the 'Latest Case Number' field.
+
+// trigger caseTriggers on Case (before insert, after insert) {
+//   if(Trigger.isBefore){
+//     if(Trigger.isInsert){
+//       CaseTriggersClassHandler.changeStatus(Trigger.new);
+//     }
+//   }
+
+//   if(Trigger.isAfter){
+//     if(Trigger.isInsert){
+//       CaseTriggersClassHandler.updateRelatedAccount(Trigger.new);
+//     }
+//   }
+// }
+
+// public class CaseTriggersClassHandler {
+// 	public static void changeStatus(list<Case> cases){
+//     for (Case cs : cases) {
+//       if (cs.Origin == 'Email') {
+//         cs.Status = 'New';
+//         cs.Priority = 'Medium';
+//       }
+//     }
+//   }
+
+//   public static void updateRelatedAccount(List<Case> cases){
+//     List<Account> accounts = new List<Account>();
+//     for (Case cs : cases) {
+//       Account acc = new Account(Id = cs.AccountId, Latest_Case_Number__c = cs.CaseNumber);
+//       accounts.add(acc);
+//     }
+//     update accounts;
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // On Account create two checkbox fields labeled as Contact and Opportunity. When a new Account is created and if a particular Contact or Opportunity checkbox is checked then create that related record. Also, Opportunity record should be created only if the Account Active picklist is populated with a yes.
+
+// public static void addRelatedRecords(List<Account> accounts) {
+//   list<Contact> contacts = new List<Contact>();
+//   list<Opportunity> opportunities = new List<Opportunity>();
+//   for (Account acc : accounts) {
+//     if (acc.Create_Contact__c) {
+//       Contact cont = new Contact(
+//         AccountId = acc.Id,
+//         LastName = 'create contact checked'
+//       );
+//       contacts.add(cont);
+//     }
+
+//     if (acc.Create_Opportunity__c) {
+//       Opportunity opp = new Opportunity(
+//         AccountId = acc.Id,
+//         Name = 'create opportunity checked',
+//         StageName = 'Prospecting',
+//         CloseDate = Date.today()
+//       );
+//       opportunities.add(opp);
+//     }
+//   }
+//   if (!contacts.isEmpty()) {
+//     insert contacts;
+//   }
+
+//   if (!opportunities.isEmpty()) {
+//     insert opportunities;
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // If the Account phone is updated then populate below message in description. Description = Phone is Updated! Old Value : XXX & New Value : XXX
+
+// public static void phoneHistory(
+//   List<Account> accounts,
+//   Map<Id, Account> oldAccounts
+// ) {
+//   for (Account acc : accounts) {
+//     Account oldAcc = oldAccounts.get(acc.Id);
+//     if (acc.Phone != oldAcc.Phone) {
+//       acc.Description =
+//         'Phone is Updated! Old Value : ' +
+//         oldAcc.Phone +
+//         ' & New Value : ' +
+//         acc.Phone;
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // If the Account phone is updated then populate the phone number on all related Contacts (Home Phone field). [Using Parent-Child SOQL]
+//! important task (parent.child list (ex: acc : acc.Contacts))
+
+// // create the method
+// public static void updateContacts(
+//   List<Account> accounts,
+//   Map<Id, Account> oldAccounts
+// ) {
+//   // set to collect Account IDs and List to collect Related contacts that will be Updated.
+//   Set<Id> updatedAccounts = new Set<Id>();
+//   List<Contact> contactsToUpdate = new List<Contact>();
+
+//   // collect the account ID with actual phoen updated
+//   for (Account acc : accounts) {
+//     Account oldAcc = oldAccounts.get(acc.Id);
+//     if (acc.Phone != oldAcc.Phone) {
+//       updatedAccounts.add(acc.Id);
+//     }
+//   }
+
+//   // collect the related contacts for these accounts
+//   List<Account> relatedContacts = [
+//     SELECT
+//       Id,
+//       Phone,
+//       (
+//         SELECT Id, HomePhone
+//         FROM Contacts
+//       )
+//     FROM Account
+//     WHERE Id IN :updatedAccounts
+//   ];
+
+//   // update the home phone field value of these contacts
+//   for (Account acc : relatedContacts) {
+//     for (Contact cont : acc.Contacts) {
+//       cont.HomePhone = acc.Phone;
+//       contactsToUpdate.add(cont);
+//     }
+//   }
+//   // update the contacts (DML)
+//   update contactsToUpdate;
+// }
+
+// --------------------------------------------------------------------
+// // If the Account billing address is updated then update related contacts mailing address. [Using Parent-Child SOQL]
+//! important task (the address code / country trick)
+
+// // create the method
+// public static void updateContactsMailingAddress(
+//   List<Account> accounts,
+//   Map<Id, Account> oldAccounts
+// ) {
+//   // set to collect Account IDs and List to collect Related contacts that will be Updated.
+//   Set<Id> updatedAccounts = new Set<Id>();
+//   List<Contact> contactsToUpdate = new List<Contact>();
+
+//   // collect the account ID with actual phoen updated
+//   for (Account acc : accounts) {
+//     Account oldAcc = oldAccounts.get(acc.Id);
+//     if (
+//       acc.BillingCity != oldAcc.BillingCity ||
+//       acc.BillingCountry != oldAcc.BillingCountry ||
+//       acc.BillingStreet != oldAcc.BillingStreet ||
+//       acc.BillingState != oldAcc.BillingState ||
+//       acc.BillingPostalCode != oldAcc.BillingPostalCode ||
+//       acc.BillingCountryCode != oldAcc.BillingCountryCode ||
+//       acc.BillingStateCode != oldAcc.BillingStateCode
+//     ) {
+//       updatedAccounts.add(acc.Id);
+//     }
+//   }
+
+//   if (updatedAccounts.isEmpty()) {
+//     return;
+//   }
+
+//   // collect the related contacts for these accounts
+//   List<Account> relatedContacts = [
+//     SELECT
+//       Id,
+//       BillingCity,
+//       BillingCountry,
+//       BillingStreet,
+//       BillingState,
+//       BillingPostalCode,
+//       BillingCountryCode,
+//       BillingStateCode,
+//       (
+//         SELECT
+//           Id,
+//           MailingCity,
+//           MailingCountry,
+//           MailingStreet,
+//           MailingState,
+//           MailingPostalCode,
+//           MailingCountryCode,
+//           MailingStateCode
+//         FROM Contacts
+//       )
+//     FROM Account
+//     WHERE Id IN :updatedAccounts
+//   ];
+
+//   // update the home phone field value of these contacts
+//   for (Account acc : relatedContacts) {
+//     for (Contact cont : acc.Contacts) {
+//       cont.MailingCity = acc.BillingCity;
+//       cont.MailingCountry = acc.BillingCountry;
+//       cont.MailingStreet = acc.BillingStreet;
+//       cont.MailingState = acc.BillingState;
+//       cont.MailingPostalCode = acc.BillingPostalCode;
+//       cont.MailingCountryCode = acc.BillingCountryCode;
+//       cont.MailingStateCode = acc.BillingStateCode;
+//       contactsToUpdate.add(cont);
+//     }
+//   }
+//   // update the contacts (DML)
+//   update contactsToUpdate;
+// }
+
+// --------------------------------------------------------------------
+// // When an account inserts and CopyBilling ToShipping (Custom Field) checkbox is checked then automatically copy account billing address into account shipping address.
+//! important task (the address code / country trick)
+
+// public static void fillAddressIfEmpty(list<Account> accounts) {
+//   for (Account acc : accounts) {
+//     acc.BillingCity = String.isBlank(acc.BillingCity)
+//       ? 'added by trigger'
+//       : acc.BillingCity;
+//     acc.BillingStreet = String.isBlank(acc.BillingStreet)
+//       ? 'trigger street'
+//       : acc.BillingStreet;
+//     if (
+//       String.isBlank(acc.BillingCountry) &&
+//       String.isBlank(acc.BillingCountryCode)
+//     ) {
+//       acc.BillingCountry = 'Angola';
+//     }
+//     if (!String.isBlank(acc.Industry) && acc.Industry == 'Media') {
+//       acc.Rating = 'Hot';
+//     }
+//     if (acc.CopyBilling_ToShipping__c) {
+//       acc.ShippingCity = acc.BillingCity;
+//       acc.ShippingStreet = acc.BillingStreet;
+//       acc.ShippingCountry = acc.BillingCountry;
+//       acc.ShippingCountryCode = acc.BillingCountryCode;
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // When a Opportunity Stage (field) is changed, create a Task record on Opportunity and assign it to Logged In User / Opportunity Owner / Any User.
+//! important task (using the Task Object)
+
+// public static void createTask(
+//   List<Opportunity> opportunities,
+//   Map<Id, Opportunity> oldOpportunities
+// ) {
+//   List<Task> createdTasks = new List<Task>();
+
+//   // Single loop: check for stage change and create Task directly
+//   for (Opportunity opp : opportunities) {
+//     Opportunity oldOpp = oldOpportunities.get(opp.Id);
+
+//     if (opp.StageName != oldOpp.StageName) {
+//       createdTasks.add(
+//         new Task(
+//           WhatId = opp.Id,
+//           Status = 'Not Started',
+//           Subject = 'Stage Changed to: ' + opp.StageName,
+//           OwnerId = UserInfo.getUserId() // this will assign the logged in user
+//           //OwnerId = opp.OwnerId // this will assign the opportunity owner
+//         )
+//       );
+//     }
+//   }
+
+//   // Guard clause: perform DML only if tasks were generated
+//   if (!createdTasks.isEmpty()) {
+//     insert createdTasks;
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // Write a trigger on Account when Account Active field is updated from 'yes' to 'No' then check all opportunities associated with the account. Update all Opportunities Stage to close lost if stage not equal to close won.
+
+// public static void closeRelatedOpportunities(
+//   List<Account> accounts,
+//   map<Id, Account> oldAccounts
+// ) {
+//   set<Id> updatedAccounts = new Set<Id>();
+
+//   for (Account acc : accounts) {
+//     Account oldAcc = oldAccounts.get(acc.Id);
+//     if (acc.Active__c == 'No' && oldAcc.Active__c == 'Yes') {
+//       updatedAccounts.add(acc.Id);
+//     }
+//   }
+
+//   if (updatedAccounts.isEmpty()) {
+//     return;
+//   }
+
+//   List<Opportunity> relatedOpps = [
+//     SELECT Id, StageName
+//     FROM Opportunity
+//     WHERE
+//       AccountId IN :updatedAccounts
+//       AND StageName != 'Closed Won'
+//       AND StageName != 'Closed Lost'
+//   ];
+
+//   for (Opportunity opp : relatedOpps) {
+//     opp.StageName = 'Closed Lost';
+//   }
+
+//   if (!relatedOpps.isEmpty()) {
+//     update relatedOpps;
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // Apply validation using addError() method in trigger. While Creation of Opportunity is Amount is null then throw an error message.
+//* Note, I will update an existing method in the class that handle also something related to the amount
+
+// public static void changeDesription(list<Opportunity> opportunities) {
+//   for (Opportunity opp : opportunities) {
+//     if (opp.Amount == null) {
+//       opp.addError('please fill the amount field');
+//     } else if (opp.Amount > 100000) {
+//       opp.Description = 'Hot "added by trigger"';
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // When an opportunity is updated to Closed Lost and Closed Lost Reason (field) is not populated then throw validation error that 'Please populate Closed Lost Reason' on opportunity. [before update]
+
+// public static void checkReason(
+//   List<Opportunity> opportunities,
+//   map<Id, Opportunity> oldOpps
+// ) {
+//   for (Opportunity opp : opportunities) {
+//     Opportunity oldOp = oldOpps.get(opp.Id);
+//     if (
+//       oldOp.StageName != 'Closed Lost' &&
+//       opp.StageName == 'Closed Lost' &&
+//       String.isBlank(opp.Closed_lost_reason__c)
+//     ) {
+//       opp.Closed_lost_reason__c.addError( // this will add the error message on the field itself
+//         'you must fill the rejection reason field if opportunity is closed lost'
+//       );
+//       // opp.addError( // this will add the error message on the page
+//       //   'you must fill the rejection reason field if opportunity is closed lost'
+//       // );
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // Write a trigger on Account and check only System Administrator profile users should be able to delete an account.
+
+// public static void onlyAdmins(List<Account> accounts) {
+//   // getting the ID of the user's profile
+//   Id userProfileId = UserInfo.getProfileId();
+
+//   // getting the *record* of the user's profle from the profile object
+//   Profile userProfileName = [
+//     SELECT NAME
+//     FROM Profile
+//     WHERE Id = :userProfileId
+//     LIMIT 1
+//   ];
+
+//   if (userProfileName.Name != 'System Administrator') {
+//     for (Account acc : accounts) {
+//       acc.addError(
+//         'only admins can delete accounts ... ama tekbar eb2a garab tani.'
+//       );
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // If an opportunity is closed then, no one should be able to delete it except the user having a System Administrator profile.
+//! important task (using user.info class + using .IsClosed())
+
+// public static void onlyAdminCanChange(List<Opportunity> opportunity) {
+//   // get the user profile record
+
+//   Profile userProfileRecord = [
+//     SELECT NAME
+//     FROM Profile
+//     WHERE Id = :UserInfo.getProfileId()
+//     LIMIT 1
+//   ];
+//   // check if user is admin ?
+//   Boolean isAdmin = (userProfileRecord.Name == 'System Administrator');
+
+//   // if user is admin and opp was close then can edit
+//   for (Opportunity opp : opportunity) {
+//     if (!isAdmin && opp.IsClosed) {
+//       opp.addError('ama tekbar w teb2a ADMIN eb2a ta3ala');
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // When the Employee record is deleted then update 'Left Employee Count' on Account.
+//* this will be an After Delete trigger event because validation rules comes after the 'before triggers' in the order of execution.
+//! important task (using map)
+
+// public static void removedEmployees(list<Employee__c> employees) {
+//   //create a map to collect account Ids (key) and count of left employees (value)
+//   Map<Id, Integer> countOfDeletedEmployees = new Map<Id, Integer>();
+
+//   //loop over employees and update account Ids with number of left employees
+//   for (Employee__c emp : employees) {
+//     if (emp.Account__c != null) {
+//       Integer currentCount = countOfDeletedEmployees.containsKey(emp.Account__c)
+//         ? countOfDeletedEmployees.get(emp.Account__c)
+//         : 0;
+
+//       countOfDeletedEmployees.put(emp.Account__c, currentCount + 1);
+//     }
+//   }
+
+//   // early return if map is empty
+//   if (countOfDeletedEmployees.isEmpty()) {
+//     return;
+//   }
+
+//   // query to get related accounts with Left_Employee_Count__c
+//   list<Account> accounts = [
+//     SELECT Id, Left_Employee_Count__c
+//     FROM Account
+//     WHERE Id IN :countOfDeletedEmployees.keySet()
+//   ];
+
+//   // loop over related accounts to update Left_Employee_Count__c with new value
+//   for (Account acc : accounts) {
+//     Decimal previousLeft = acc.Left_Employee_Count__c == null
+//       ? 0
+//       : acc.Left_Employee_Count__c;
+//     acc.Left_Employee_Count__c =
+//       previousLeft + countOfDeletedEmployees.get(acc.Id);
+//   }
+//   update accounts;
+// }
+
+// --------------------------------------------------------------------
+// // When the Employee record is inserted, deleted and undeleted then update 'Present Employee Count' on related Account. [Parent-Child SOQL]
+
+// //* the insert and undelete version.
+// //? NOTE: this code have a rist to hit the query row limit for the child subquery (50,000). Hence, I will provide another code using {{{{Aggregate SOQL Query}}}}
+//! important (used {{{{Aggregate SOQL Query}}}} )
+
+// public static void addedEmployee(List<Employee__c> employees) {
+//   Set<Id> accountIds = new Set<Id>();
+
+//   for (Employee__c emp : employees) {
+//     if (!String.isBlank(emp.Account__c)) {
+//       accountIds.add(emp.Account__c);
+//     }
+//   }
+
+//   if (accountIds.isEmpty()) {
+//     return;
+//   }
+
+//   List<Account> accounts = [
+//     SELECT Id, Present_Employee_Count__c, (SELECT Id FROM Employees__r)
+//     FROM Account
+//     WHERE Id IN :accountIds
+//   ];
+
+//   for (Account acc : accounts) {
+//     acc.Present_Employee_Count__c = acc.Employees__r.size();
+//   }
+
+//   update accounts;
+// }
+
+// //* EX: using {{{{Aggregate SOQL Query}}}}:
+// public static void presentEmployees(List<Employee__c> employees) {
+//     Set<Id> accountIds = new Set<Id>();
+
+//     for (Employee__c emp : employees) {
+//         if (emp.Account__c != null) {
+//             accountIds.add(emp.Account__c);
+//         }
+//     }
+
+//     if (accountIds.isEmpty()) {
+//         return;
+//     }
+
+//     // Aggregate query returns only 1 row per Account, ignoring child record limits
+//     List<AggregateResult> results = [
+//         SELECT Account__c accId, COUNT(Id) totalCount
+//         FROM Employee__c
+//         WHERE Account__c IN :accountIds
+//         GROUP BY Account__c
+//     ];
+
+//     List<Account> accountsToUpdate = new List<Account>();
+
+//     for (AggregateResult ar : results) {
+//         Id accId = (Id) ar.get('accId');
+//         Integer totalCount = (Integer) ar.get('totalCount');
+
+//         accountsToUpdate.add(new Account(
+//             Id = accId,
+//             Present_Employee_Count__c = totalCount
+//         ));
+//     }
+
+//     if (!accountsToUpdate.isEmpty()) {
+//         update accountsToUpdate;
+//     }
+// }
+
+// --------------------------------------------------------------------
+// // Upon contact creation an email should be sent to email populated on Contact with specified template.
+
+// public class ContactTriggerHandler {
+//   public static void sendEmail(List<Contact> contacts) {
+//     // hardcoded IDs should ideally be retrieved dynamically or via Custom Settings/Metadata
+//     List<EmailTemplate> template = [
+//       SELECT Id
+//       FROM EmailTemplate
+//       WHERE DeveloperName = 'Trigger_Email_Template'
+//     ];
+
+//     Id templateId = template[0].Id;
+
+//     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
+
+//     for (Contact cont : contacts) {
+//       // Ensure Contact has an ID (after insert) and an Email address
+//       if (cont.Id != null && String.isNotBlank(cont.Email)) {
+//         Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
+
+//         // setTargetObjectId automatically sets the recipient to cont.Email and binds template merge fields
+//         message.setTargetObjectId(cont.Id);
+//         message.setTemplateId(templateId);
+//         message.setSaveAsActivity(true);
+
+//         emails.add(message);
+//       }
+//     }
+
+//     // Send the list of emails in a single bulkified call
+//     if (!emails.isEmpty()) {
+//       Messaging.sendEmail(emails);
+//     }
+//   }
+// }
+
+// --------------------------------------------------------------------
+// // number of Partner Case or Customer Case on Account object. Create Custom Fields on Account to have total numbers.

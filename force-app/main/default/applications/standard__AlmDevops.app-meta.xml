@@ -6,7 +6,7 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
-    <label>DevOps Center</label>
+    <label>Lifecycle Center (DevOps Center)</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
     <tabs>standard-DevopsProject</tabs>
@@ -19,5 +19,6 @@
     <tabs>member_policy__c</tabs>
     <tabs>claim_line_item__c</tabs>
     <tabs>Position__c</tabs>
+    <tabs>Employee__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>

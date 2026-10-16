@@ -15,8 +15,12 @@
     <tabs>member_policy__c</tabs>
     <tabs>claim_line_item__c</tabs>
     <tabs>Position__c</tabs>
+    <tabs>Employee__c</tabs>
     <uiType>Lightning</uiType>
     <workspaceConfig>
+        <mappings>
+            <tab>Employee__c</tab>
+        </mappings>
         <mappings>
             <tab>Position__c</tab>
         </mappings>

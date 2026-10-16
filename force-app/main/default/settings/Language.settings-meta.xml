@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <LanguageSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <displayedLanguages>all</displayedLanguages>
     <enableCanadaIcuFormat>true</enableCanadaIcuFormat>
     <enableDataTranslation>false</enableDataTranslation>
     <enableEndUserLanguages>false</enableEndUserLanguages>
@@ -9,6 +10,7 @@
     <enableLocaleInsensitiveFiltering>false</enableLocaleInsensitiveFiltering>
     <enablePlatformLanguages>false</enablePlatformLanguages>
     <enableTranslationWorkbench>true</enableTranslationWorkbench>
-    <enableTranslationWorkbenchConnectAPI>false</enableTranslationWorkbenchConnectAPI>
+    <enableTranslationWorkbenchConnectAPI
+  >false</enableTranslationWorkbenchConnectAPI>
     <useLanguageFallback>false</useLanguageFallback>
 </LanguageSettings>
