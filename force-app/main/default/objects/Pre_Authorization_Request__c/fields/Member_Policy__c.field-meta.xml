@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Member_Policy__c</fullName>
+    <description>Parent policy relationship (Cascades deletes).</description>
+    <inlineHelpText>Parent policy relationship.</inlineHelpText>
+    <label>Member Policy</label>
+    <referenceTo>member_policy__c</referenceTo>
+    <relationshipLabel>Pre-Authorization Requests</relationshipLabel>
+    <relationshipName>Pre_Authorization_Requests</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Remaining_Balance__c</fullName>
+    <description
+  >Formula: Yearly_Limit__c - Utilized_Limit_Yearly__c</description>
+    <formula
+  >BLANKVALUE(Yearly_Limit__c, 0) - BLANKVALUE(Utilized_Limit_Yearly__c, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Remaining balance for this policy.</inlineHelpText>
+    <label>Remaining Balance</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

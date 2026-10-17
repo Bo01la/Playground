@@ -208,8 +208,6 @@
 // // ? 4- getNumDml:
 // // Returns the number of failed records.
 
-
-
 // // 1. Setup: Insert valid accounts so they generate Salesforce IDs
 // Account acc1 = new Account(Name = 'Valid Account 1');
 // Account acc2 = new Account(Name = 'Valid Account 2');
@@ -223,27 +221,28 @@
 // try {
 //   // 3. Attempt to update the broken records
 //   update accountsToUpdate;
-  
+
 // } catch (DmlException e) {
-  
+
 //   // ? 4- getNumDml: Returns the total number of failed records
 //   Integer failedRecordsCount = e.getNumDml();
 //   System.debug('Total failed records: ' + failedRecordsCount);
-  
+
 //   // Loop through all the failed records dynamically
 //   for (Integer i = 0; i < failedRecordsCount; i++) {
 //     System.debug('--- Error Details for Record at Index ' + i + ' ---');
-    
+
 //     // ? 2- getDmlId: Returns the ID of the specific failed record
 //     Id failedRecordId = e.getDmlId(i);
 //     System.debug('Failed Record ID: => ' + failedRecordId);
-    
+
 //     // ? 1- getDmlFieldNames: Returns the fields that caused the error (e.g., 'Name')
 //     List<String> failedFields = e.getDmlFieldNames(i);
 //     System.debug('Fields causing the error: => ' + failedFields);
-    
+
 //     // ? 3- getDmlMessage: Returns the exact error message for this specific record
 //     String errorMessage = e.getDmlMessage(i);
 //     System.debug('Error Message: => ' + errorMessage);
 //   }
 // }
+

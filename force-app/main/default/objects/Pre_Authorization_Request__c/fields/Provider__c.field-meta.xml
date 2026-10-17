@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Provider__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Servicing healthcare facility lookup.</description>
+    <inlineHelpText>Servicing healthcare facility lookup.</inlineHelpText>
+    <label>Provider</label>
+    <referenceTo>Provider__c</referenceTo>
+    <relationshipLabel>Pre-Authorization Requests</relationshipLabel>
+    <relationshipName>Pre_Authorization_Requests</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
