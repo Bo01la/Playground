@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Type__c</fullName>
+    <label>Service Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Inpatient,</fullName>
+                <default>false</default>
+                <label>Inpatient,</label>
+            </value>
+            <value>
+                <fullName>MRI/CT Scan,</fullName>
+                <default>false</default>
+                <label>MRI/CT Scan,</label>
+            </value>
+            <value>
+                <fullName>Outpatient,</fullName>
+                <default>false</default>
+                <label>Outpatient,</label>
+            </value>
+            <value>
+                <fullName>Physical Therapy</fullName>
+                <default>false</default>
+                <label>Physical Therapy</label>
+            </value>
+            <value>
+                <fullName>Surgical,</fullName>
+                <default>false</default>
+                <label>Surgical,</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

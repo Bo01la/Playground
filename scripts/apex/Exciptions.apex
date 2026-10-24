@@ -9,6 +9,8 @@
 //   insert acc;
 // } catch (DmlException e) {
 //   system.debug('the DML exception thrown is: => ' + e.getMessage());
+//   acc.name = 'error1'; 
+//   insert acc; 
 // }
 
 // System.debug('this message will be logged because we used try/catch');
@@ -67,7 +69,7 @@
 // //Type of exceptions:
 
 // //? 5- SObject exception:
-// Account testAcc = new Account(Name = 'Test SObject');
+// Account testAcc = new Account(Name = 'Tkjsnhsbjhsd');
 // insert testAcc;
 // try {
 //   // Querying the record but omitting the 'Name' field
@@ -209,8 +211,8 @@
 // // Returns the number of failed records.
 
 // // 1. Setup: Insert valid accounts so they generate Salesforce IDs
-// Account acc1 = new Account(Name = 'Valid Account 1');
-// Account acc2 = new Account(Name = 'Valid Account 2');
+// Account acc1 = new Account(Name = 'Valid Account 111');
+// Account acc2 = new Account(Name = 'Valid Account 2222');
 // List<Account> accountsToUpdate = new List<Account>{acc1, acc2};
 // insert accountsToUpdate;
 
@@ -245,4 +247,5 @@
 //     System.debug('Error Message: => ' + errorMessage);
 //   }
 // }
+
 
