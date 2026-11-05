@@ -11,34 +11,34 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Draft,</fullName>
+                <fullName>Draft</fullName>
                 <default>false</default>
-                <label>Draft,</label>
+                <label>Draft</label>
             </value>
             <value>
-                <fullName>Submitted,</fullName>
+                <fullName>Submitted</fullName>
                 <default>false</default>
-                <label>Submitted,</label>
+                <label>Submitted</label>
             </value>
             <value>
-                <fullName>Under Review,</fullName>
+                <fullName>Under Review</fullName>
                 <default>false</default>
-                <label>Under Review,</label>
+                <label>Under Review</label>
             </value>
             <value>
-                <fullName>Pending Info,</fullName>
+                <fullName>Pending Info</fullName>
                 <default>false</default>
-                <label>Pending Info,</label>
+                <label>Pending Info</label>
             </value>
             <value>
-                <fullName>Approved,</fullName>
+                <fullName>Approved</fullName>
                 <default>false</default>
-                <label>Approved,</label>
+                <label>Approved</label>
             </value>
             <value>
-                <fullName>Rejected,</fullName>
+                <fullName>Rejected</fullName>
                 <default>false</default>
-                <label>Rejected,</label>
+                <label>Rejected</label>
             </value>
             <value>
                 <fullName>Expired</fullName>

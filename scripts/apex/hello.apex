@@ -1237,3 +1237,65 @@ public class FootballTeam {
 
 // --------------------------------------------------------------------
 // // number of Partner Case or Customer Case on Account object. Create Custom Fields on Account to have total numbers.
+//---------------------------------------------------------------------------------------------------
+
+public class PreAuthorizationRequestHandler {
+  /**
+   * Validates that requested authorization amounts do not exceed
+   * the associated parent policy's remaining financial balance.
+   * Compatible with before insert and before update trigger contexts.
+   */
+  public static void validatePolicyLimits(
+    List<Pre_Authorization_Request__c> preAuths
+  ) {
+    // 1. Collect parent policy IDs from incoming trigger records
+    Set<Id> policyIds = new Set<Id>();
+    for (Pre_Authorization_Request__c pre : preAuths) {
+      if (pre.Member_Policy__c != null) {
+        policyIds.add(pre.Member_Policy__c);
+      }
+    }
+
+    if (policyIds.isEmpty()) {
+      return;
+    }
+
+    // 2. Query parent policies into a lookup map
+    Map<Id, member_policy__c> policyMap = new Map<Id, member_policy__c>(
+      [
+        SELECT Id, Remaining_Balance__c
+        FROM member_policy__c
+        WHERE Id IN :policyIds
+      ]
+    );
+
+    // 3. Perform bulkified validation against Trigger.new instances
+    for (Pre_Authorization_Request__c pre : preAuths) {
+      if (
+        pre.Member_Policy__c == null ||
+        !policyMap.containsKey(pre.Member_Policy__c)
+      ) {
+        continue;
+      }
+
+      member_policy__c policy = policyMap.get(pre.Member_Policy__c);
+      Decimal requestedAmt = (pre.Requested_Amount__c != null)
+        ? pre.Requested_Amount__c
+        : 0;
+      Decimal remainingBal = (policy.Remaining_Balance__c != null)
+        ? policy.Remaining_Balance__c
+        : 0;
+
+      if (requestedAmt > remainingBal) {
+        // Highlights the exact field in the UI banner and prevents record save
+        pre.Requested_Amount__c.addError(
+          'Requested amount ($' +
+            requestedAmt.format() +
+            ') exceeds the remaining policy ceiling ($' +
+            remainingBal.format() +
+            ').'
+        );
+      }
+    }
+  }
+}

@@ -139,4 +139,3 @@ Stateful Batch Apex (Database.Stateful): Preserves non-static instance variable 
 // }
 // // in the IDE or the developer console anonymous apex code we execute the below:
 // Database.executeBatch(new UpdateAccountNameBatchWithStateful(), 8);
-
