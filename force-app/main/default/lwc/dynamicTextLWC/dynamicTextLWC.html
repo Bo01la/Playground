@@ -1,0 +1,11 @@
+<template>
+  <div class="slds-m-around_small">
+    <p class="slds-m-around_xx-small slds-border_bottom">{text}</p>
+    <lightning-input
+      class="slds-m-around_small"
+      value={text}
+      placeholder="type here to reflect above"
+      onchange={changeTextHandler}
+    ></lightning-input>
+  </div>
+</template>
