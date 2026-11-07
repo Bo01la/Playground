@@ -1,0 +1,18 @@
+<template>
+  <lightning-card title={headerText} icon-name="standard:user">
+    <div class="slds-m-around_medium">
+      <template lwc:if={isDataLoaded}>
+        <p><strong>Logged-in User ID:</strong> {userId}</p>
+        <p><strong>First Name:</strong> {firstName}</p>
+        <p><strong>Email Address:</strong> {email}</p>
+        <p><strong>Context Record ID:</strong> {recordId}</p>
+        <p><strong>Context Object Name:</strong> {objectApiName}</p>
+      </template>
+      <template lwc:else>
+        <lightning-spinner
+          alternative-text="Loading User Data..."
+        ></lightning-spinner>
+      </template>
+    </div>
+  </lightning-card>
+</template>

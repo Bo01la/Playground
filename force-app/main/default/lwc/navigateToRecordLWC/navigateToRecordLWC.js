@@ -29,6 +29,9 @@
 import { LightningElement, api } from "lwc";
 
 export default class NavigateToRecordLWC extends LightningElement {
+  // just by adding (@api) to a variable called (recordId) we can access the Id of the record at which the // component is used from Flow  and get the record Id dynamically
+  // also (@api objectApiName) will give the object name at which the record belogs to
+
   @api recordId;
 
   handleNavigate() {
