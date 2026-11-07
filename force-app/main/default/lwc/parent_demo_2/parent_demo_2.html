@@ -1,0 +1,27 @@
+<template>
+  <lightning-card icon-name="standard:hierarchy">
+    <h1 class="slds-m-around_small">Parent component</h1>
+    <p class="slds-text-color_error slds-p-left_small">
+      child to parent communication
+    </p>
+
+    <!-- Only render paragraph tags once data is received from the child -->
+    <template lwc:if={messageFromChild1}>
+      <p class="slds-m-around_small">{messageFromChild1}</p>
+      <p class="slds-m-around_small">{messageFromChild2}</p>
+    </template>
+
+    <div class="slds-m-around_medium">
+      <c-child_demo_2
+        child-cool-property={parentPassedText}
+        onchildevent={handleDataInParent}
+      ></c-child_demo_2>
+      <div class="slds-m-top_large">
+        <lightning-button
+          label="Call Child Method"
+          onclick={handleCallChildMethod}
+        ></lightning-button>
+      </div>
+    </div>
+  </lightning-card>
+</template>

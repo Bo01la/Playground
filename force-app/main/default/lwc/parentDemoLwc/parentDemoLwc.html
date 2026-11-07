@@ -1,5 +1,8 @@
 <template>
   <lightning-card title="Parent Component" icon-name="standard:hierarchy">
+    <p class="slds-text-color_error slds-p-left_small">
+      parent to child communication
+    </p>
     <div class="slds-m-around_medium">
       <!-- 1. PUBLIC PROPERTY: Passing data using kebab-case attribute -->
       <c-child-demo-lwc cool-property={childHeader}></c-child-demo-lwc>
