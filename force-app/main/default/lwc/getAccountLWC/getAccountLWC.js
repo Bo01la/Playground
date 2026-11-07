@@ -27,3 +27,6 @@ export default class GetAccountLWC extends LightningElement {
     }
   }
 }
+
+//? el fekra kolah enak 3amalt el query f el class w gebt el result hena f el js w l3ebt beha
+//? 3als el ( Declarative Data Fetching)

@@ -41,3 +41,7 @@ export default class UserCardLWC extends LightningElement {
     return this.userData && this.userData.data;
   }
 }
+
+//? el fekra hena enak mesh btesta5dem apex 5ales
+//? enta btgeb el objects w el fields w el data kolaha b js w tel3ab feha 3ala tool
+//? 3als el ( Imperative Apex Calls)
