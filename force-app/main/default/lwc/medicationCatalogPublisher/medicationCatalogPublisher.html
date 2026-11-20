@@ -1,0 +1,79 @@
+<template>
+  <lightning-card
+    title="Medication Catalog (publisher component)"
+    icon-name="standard:product"
+  >
+    <!-- Header Action: Clear Remote Cart -->
+    <lightning-button
+      slot="actions"
+      label="Clear Remote Cart"
+      variant="destructive-text"
+      icon-name="utility:delete"
+      onclick={handleClearCart}
+    >
+    </lightning-button>
+
+    <div class="slds-p-around_medium">
+      <!-- Search Input -->
+      <lightning-input
+        type="search"
+        label="Search Medications"
+        placeholder="Type medication name..."
+        value={searchKey}
+        onchange={handleSearchChange}
+        class="slds-m-bottom_medium"
+      >
+      </lightning-input>
+
+      <!-- Medication Grid -->
+      <template lwc:if={hasMedications}>
+        <div class="slds-grid slds-wrap slds-gutters_small">
+          <template for:each={filteredMedications} for:item="med">
+            <div
+              key={med.id}
+              class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small"
+            >
+              <div class="slds-box slds-theme_shade">
+                <div
+                  class="slds-grid slds-grid_align-spread slds-m-bottom_x-small"
+                >
+                  <h3 class="slds-text-heading_small">
+                    <strong>{med.name}</strong>
+                  </h3>
+                  <lightning-badge label={med.category}></lightning-badge>
+                </div>
+
+                <p class="slds-text-body_small slds-m-bottom_xx-small">
+                  <strong>Unit Price:</strong> {med.price} EGP
+                </p>
+                <p class="slds-text-body_small slds-m-bottom_small">
+                  <strong>Remaining Stock:</strong> {med.stock}
+                </p>
+
+                <!-- Add to Cart Button (uses data-id to identify which item was clicked) -->
+                <lightning-button
+                  label="Add to Cart"
+                  variant="brand"
+                  icon-name="utility:add"
+                  data-id={med.id}
+                  disabled={med.isOutOfStock}
+                  onclick={handleAddToCart}
+                >
+                </lightning-button>
+              </div>
+            </div>
+          </template>
+        </div>
+      </template>
+
+      <!-- Empty Search State -->
+      <template lwc:else>
+        <div
+          class="slds-align_absolute-center slds-p-around_medium slds-text-color_weak"
+        >
+          <p>No medications match your search.</p>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

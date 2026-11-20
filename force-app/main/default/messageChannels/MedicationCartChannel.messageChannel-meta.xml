@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Medication Cart Channel</masterLabel>
+    <isExposed>true</isExposed>
+    <description
+  >Broadcasts medication selection actions between catalog and cart LWCs.</description>
+    <lightningMessageFields>
+        <fieldName>medicationId</fieldName>
+        <description>Unique ID of the selected medication</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>medicationName</fieldName>
+        <description>Commercial name of the medication</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>unitPrice</fieldName>
+        <description>Frozen unit price of the medication</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>actionType</fieldName>
+        <description>Action indicator: ADD or CLEAR</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

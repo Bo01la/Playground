@@ -1,0 +1,87 @@
+<template>
+  <lightning-card title="Order Cart (Subscriber)" icon-name="standard:orders">
+    <!-- Header Badge showing total item count -->
+    <lightning-badge
+      slot="actions"
+      label={totalItemCountLabel}
+    ></lightning-badge>
+
+    <div class="slds-p-around_medium">
+      <!-- Active Cart State -->
+      <template lwc:if={hasItems}>
+        <div class="slds-m-bottom_medium">
+          <template for:each={cartItems} for:item="item">
+            <div
+              key={item.medicationId}
+              class="slds-box slds-box_x-small slds-theme_default slds-m-bottom_x-small"
+            >
+              <div
+                class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
+              >
+                <!-- Left: Name & Unit Price breakdown -->
+                <div>
+                  <p class="slds-text-heading_small">
+                    <strong>{item.medicationName}</strong>
+                  </p>
+                  <p class="slds-text-body_small slds-text-color_weak">
+                    {item.unitPrice} EGP × {item.quantity}
+                  </p>
+                </div>
+
+                <!-- Right: Subtotal & Optional Remove Action -->
+                <div class="slds-text-align_right">
+                  <p class="slds-text-body_regular">
+                    <strong>{item.subtotal} EGP</strong>
+                  </p>
+                  <lightning-button-icon
+                    icon-name="utility:close"
+                    variant="bare"
+                    size="small"
+                    alternative-text="Remove Item"
+                    title="Remove Item"
+                    data-id={item.medicationId}
+                    onclick={handleRemoveItem}
+                  >
+                  </lightning-button-icon>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <!-- Grand Total Footer Box -->
+        <div
+          class="slds-box slds-theme_shade slds-grid slds-grid_align-spread slds-grid_vertical-align-center"
+        >
+          <span class="slds-text-heading_small"
+            ><strong>Grand Total</strong></span
+          >
+          <span class="slds-text-heading_medium slds-text-color_success">
+            <strong>{grandTotal} EGP</strong>
+          </span>
+        </div>
+      </template>
+
+      <!-- Empty Cart State -->
+      <template lwc:else>
+        <div
+          class="slds-align_absolute-center slds-p-around_large slds-text-color_weak"
+        >
+          <div class="slds-text-align_center">
+            <lightning-icon
+              icon-name="utility:cart"
+              size="medium"
+              class="slds-m-bottom_small"
+            ></lightning-icon>
+            <p class="slds-text-body_regular">
+              Your order cart is currently empty.
+            </p>
+            <p class="slds-text-body_small">
+              Select medications from the catalog to begin.
+            </p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

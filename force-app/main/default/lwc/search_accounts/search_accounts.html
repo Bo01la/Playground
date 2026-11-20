@@ -1,0 +1,27 @@
+<template>
+  <lightning-card
+    title="itiration and account search"
+    class="slds-p-around_medium"
+  >
+    <p>
+      in this example, we fetch accounts imperatively through apex class, then
+      we itirate over the result to create list items
+    </p>
+
+    <lightning-input
+      class="slds-m-around_medium"
+      placeholder="Search Accounts..."
+      value={searchKey}
+      onchange={handleSearch}
+      type="search"
+    ></lightning-input>
+    <div lwc:if={hasRecords}>
+      <h1 class="slds-m-bottom_xx-small">Located Accounts:-></h1>
+      <ul>
+        <template iterator:it={fetchedRecords}>
+          <li key={it.value.Id}>{it.value.Name}</li>
+        </template>
+      </ul>
+    </div>
+  </lightning-card>
+</template>

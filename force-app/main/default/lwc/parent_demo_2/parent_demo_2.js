@@ -7,8 +7,8 @@ export default class Parent_demo_2 extends LightningElement {
 
   handleDataInParent(event) {
     const receivedData = event.detail;
-    this.messageFromChild1 = `1st message from child is {{ ${receivedData.message1}}`;
-    this.messageFromChild2 = `2nd message from child is {{ ${receivedData.message2}}`;
+    this.messageFromChild1 = `1st message from child is {{ ${receivedData.message1}}}`;
+    this.messageFromChild2 = `2nd message from child is {{ ${receivedData.message2}}}`;
   }
 
   handleCallChildMethod() {
